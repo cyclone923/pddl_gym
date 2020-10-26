@@ -76,7 +76,8 @@ def build_layout(obs):
         seen_locs.add((r, c))
 
     # Add walls
-    for v in get_values(obs, 'is-nongoal'):
+    non_goals = get_values(obs, 'is-nongoal')
+    for v in non_goals:
         r, c = loc_str_to_loc(v[0])
         if (r, c) in seen_locs:
             continue

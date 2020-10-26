@@ -3,6 +3,7 @@ import os
 import numpy as np
 import re
 import subprocess
+import time
 
 
 class PlanningException(Exception):
@@ -15,7 +16,7 @@ def run_planner(domain_file, problem_file, planner_name, **kwargs):
     raise Exception("Unknown planner `{}`".format(planner_name))
 
 
-def run_ff(domain_file, problem_file, horizon=np.inf, timeout=10):
+def run_ff(domain_file, problem_file, horizon=np.inf, timeout=36000):
     if 'FF_PATH' not in os.environ:
         raise Exception((
             "Environment variable `FF_PATH` not found. Make sure ff is installed "
@@ -26,6 +27,7 @@ def run_ff(domain_file, problem_file, horizon=np.inf, timeout=10):
     timeout_cmd = "gtimeout" if sys.platform == "darwin" else "timeout"
     cmd_str = "{} {} {} -o {} -f {}".format(timeout_cmd, timeout, FF_PATH,
                                             domain_file, problem_file)
+    time_start = time.time()
     output = subprocess.getoutput(cmd_str)
 
     if "goal can be simplified to FALSE" in output:
@@ -37,6 +39,7 @@ def run_ff(domain_file, problem_file, horizon=np.inf, timeout=10):
         raise PlanningException("Plan not found with FF! Error: {}".format(output))
     if len(plan) > horizon:
         return []
+    print("Find plan in {} steps in {} seconds for {}".format(len(plan), time.time() - time_start, problem_file))
     if plan[-1] == "reach-goal":
         plan = plan[:-1]
     return plan
