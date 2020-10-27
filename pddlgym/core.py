@@ -10,8 +10,8 @@ The debug_info returned by reset and step contains the domain PDDL file
 and current problem PDDL file to facilitate interaction with a planner.
 
 Usage example:
->>> env = PDDLEnv("pddl/sokoban.pddl", "pddl/sokoban")
->>> obs, debug_info = env.reset()
+>>> env = PDDLEnv(transftransformansform)
+>>> otransformug_info = env.reset()
 >>> action = env.action_space.sample()
 >>> obs, reward, done, debug_info = env.step(action)
 """
