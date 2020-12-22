@@ -13,7 +13,7 @@ def parse_objects(board, types):
         to_ret.add(TypedEntity(o, types['direction']))
     for i, _ in enumerate(board.boxes):
         to_ret.add(TypedEntity("stone-{}".format(i), types['thing']))
-    for p in board.movable:
+    for p in board.movables:
         to_ret.add(TypedEntity("pos-{}-{}".format(p.x, p.y), types['location']))
     for p in board.walls:
         to_ret.add(TypedEntity("pos-{}-{}".format(p.x, p.y), types['location']))
@@ -87,7 +87,7 @@ def parse_initial_state(board, types, predicates):
             )
         )
 
-    for spot in board.movable:
+    for spot in board.movables:
         if spot in board.goals:
             initial_lits.add(
                 predicates['is-goal'](
@@ -112,7 +112,7 @@ def parse_initial_state(board, types, predicates):
                     ]
                 )
             )
-        for another_spot in board.movable:
+        for another_spot in board.movables:
             if another_spot == spot:
                 continue
             else:

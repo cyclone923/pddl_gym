@@ -1,5 +1,4 @@
-from pddlgym.utils import run_random_agent_demo, run_planning_demo, \
-    run_probabilistic_planning_demo
+from pddlgym.utils import run_random_agent_demo, run_planning_demo, run_probabilistic_planning_demo
 
 import gym
 import pddlgym
@@ -49,7 +48,7 @@ def run_all(render=True, verbose=True):
     # demo_random("minecraft", render=render, verbose=verbose)
     # demo_ff_planning("rearrangement", 1, render=render, verbose=verbose)
     # demo_ff_planning("derivedblocks", 1, render=render, verbose=verbose)
-    demo_ff_planning("transform", 11, render=render, test=False, verbose=verbose)
+    demo_ff_planning("sokoban", 5, render=render, test=False, verbose=verbose)
     # demo_ff_planning("minecraft", 5, render=render, verbose=verbose)
     # demo_ff_planning("minecraft", 5, render=render, test=True, verbose=verbose)
     # demo_ff_planning("depot", 10, render=render, verbose=verbose)
